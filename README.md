@@ -5,9 +5,9 @@ A quick and simple RESTful API to BIND, written in Ruby / Sinatra. Provides the 
 I wrote this as a solution to enable our internal Cloud to add/remove machines to DNS by integrating with the DNS architecture that we have today.
 
 ## Instructions
-    # cd etc/
-    # named -c named.conf
-    $ ruby dns.rb
+    # download bind tar ball
+    $ run install.sh
+    $ run start.sh
 
 ### Add a record to DNS:
 

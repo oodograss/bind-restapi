@@ -5,13 +5,13 @@ require 'sinatra'
 require 'json'
 require 'ipaddr'
 
-# curl -X POST -H 'Content-Type: application/json' -H 'X-Api-Key: secret' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
-# curl -X DELETE -H 'Content-Type: application/json' -H 'X-Api-Key: secret' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
+# curl -X POST -H 'Content-Type: application/json' -H 'X-Api-Key: key' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
+# curl -X DELETE -H 'Content-Type: application/json' -H 'X-Api-Key: key' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
 
 dns_params = {
-  :server => '127.0.0.1',
-  :rndc_key => 'rndc-key',
-  :rndc_secret => 'MHGIj19UPT5EmWeHWFJLOw==',
+  :server => '${host}',
+  :rndc_key => '${domain}',
+  :rndc_secret => '${key}',
   :ttl => '300'
 }
 
@@ -24,12 +24,14 @@ end
 # Authenticate all requests with an API key
 before do
   # X-Api-Key
-  error 401 unless env['HTTP_X_API_KEY'] =~ /secret/
+  error 401 unless env['HTTP_X_API_KEY'] =~ /${API_KEY}/
 end
 
 post '/dns' do
+
   request_params = JSON.parse(request.body.read)
   reverse_zone = reverse_ip(request_params["ip"])
+
   ttl = if request_params["ttl"].nil? then dns_params[:ttl] else request_params["ttl"] end
 
   # Add record to forward and reverse zones, via TCP

@@ -1,0 +1,12 @@
+$ORIGIN .
+$TTL 86400	; 1 day
+${in_addr}.in-addr.arpa		IN SOA	ns1.${domain}. admin.${domain}. (
+				2015021013 ; serial
+				43200      ; refresh (12 hours)
+				7200       ; retry (2 hours)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS	ns1.${domain}.
+$ORIGIN ${in_addr}.in-addr.arpa.
+${lb_addr}			PTR	ns1.${domain}.

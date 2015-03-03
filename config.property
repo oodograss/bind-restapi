@@ -1,0 +1,5 @@
+domain=test.com
+host=1.2.3.4
+in_addr=1.2
+lb_addr=4.3
+API_KEY=secretket

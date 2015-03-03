@@ -1,0 +1,13 @@
+$ORIGIN .
+$TTL 86400	; 1 day
+${domain}		IN SOA	ns1.${domain}. admin.${domain}. (
+				2015021016 ; serial
+				43200      ; refresh (12 hours)
+				7200       ; retry (2 hours)
+				604800     ; expire (1 week)
+				86400      ; minimum (1 day)
+				)
+			NS	ns1.${domain}.
+$ORIGIN ${domain}.
+$TTL 86400	; 1 day
+ns1			A	${host}
