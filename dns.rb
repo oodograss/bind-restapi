@@ -8,6 +8,8 @@ require 'ipaddr'
 # curl -X POST -H 'Content-Type: application/json' -H 'X-Api-Key: key' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
 # curl -X DELETE -H 'Content-Type: application/json' -H 'X-Api-Key: key' -d '{ "hostname": "host12.apple.com", "ip": "1.1.1.12" }' http://localhost:4567/dns
 
+set :bind, '0.0.0.0'
+
 dns_params = {
   :server => '${host}',
   :rndc_key => '${domain}',
